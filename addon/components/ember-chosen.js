@@ -19,6 +19,8 @@ export default Ember.Component.extend({
   optionValuePath: "",
   optionLabelPath: "",
   
+  skipEmptyItem: false,
+  
   content: Ember.A(),
   
   action: "",
