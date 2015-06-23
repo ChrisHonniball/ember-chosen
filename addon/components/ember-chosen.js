@@ -90,45 +90,28 @@ export default Ember.Component.extend({
   ///////////////
   
   /*
-   * Gathers all the group names based on the optionGroupPath.
-   */
-  groupNames: Ember.computed.map('content', function(option) {
-    return option[this.get('optionGroupPath')];
-  }),
-  
-  /*
-   * Unique group names from the content provided.
-   */
-  groups: Ember.computed.uniq('groupNames'),
-  
-  /*
-   * Gathers all the group names based on the optionGroupPath.
-   */
-  contentValues: Ember.computed.map('content', function(option) {
-    return String(option[this.get('optionValuePath')]);
-  }),
-  
-  /*
    * Built options from the content sent in to the ember-select.
    */
   options: Ember.computed('content', 'optionValuePath', 'optionLabelPath', 'optionGroupPath', {
     get: function(){
       var that = this,
-        options = Ember.A();
+        options = Ember.A(),
+        groupNames = that.get('content').mapBy(this.get('optionGroupPath')),
+        groups = Ember.$.unique(groupNames);
       
       if(!that.get('content')) {
         return options;
       }
       
       if(that.get('optionGroupPath')) {
-        that.get('groups').forEach(function(group) {
+        groups.forEach(function(group) {
           var groupOptions = [];
           
           that.get('content').filterBy(that.get('optionGroupPath'), group).forEach(function(option) {
             groupOptions.push({
-              value: option[that.get('optionValuePath')],
-              label: option[that.get('optionLabelPath')],
-              selected: that._checkSelected(option[that.get('optionValuePath')])
+              value: that._lookupOptionValue(option),
+              label: that._lookupOptionLabel(option),
+              selected: that._checkSelected(that._lookupOptionValue(option))
             });
           });
           
@@ -141,9 +124,9 @@ export default Ember.Component.extend({
         // Build the options array
         that.get('content').forEach(function(option) {
           options.push({
-            value: option[that.get('optionValuePath')],
-            label: option[that.get('optionLabelPath')],
-            selected: that._checkSelected(option[that.get('optionValuePath')])
+            value: that._lookupOptionValue(option),
+            label: that._lookupOptionLabel(option),
+            selected: that._checkSelected(that._lookupOptionValue(option))
           });
         });
       }
@@ -157,6 +140,10 @@ export default Ember.Component.extend({
         that.get('value')
       );
       //*/
+      
+      Ember.run.next(that, function(){
+        that.$().trigger("chosen:updated");
+      });
       
       return options;
     }
@@ -248,6 +235,44 @@ export default Ember.Component.extend({
   ////////////////
   //! Functions //
   ////////////////
+  
+  /*
+   * Looks up the option's value
+   */
+  _lookupOptionValue: function(option) {
+    var that = this, optionValue;
+    
+    if(that.get('optionValuePath')) {
+      optionValue = option[that.get('optionValuePath')];
+    } else {
+      if(that.get('optionLabelPath')) {
+        optionValue = option[that.get('optionLabelPath')];
+      } else {
+        optionValue = option;
+      }
+    }
+    
+    return optionValue;
+  },
+  
+  /*
+   * Looks up the option's label
+   */
+  _lookupOptionLabel: function(option) {
+    var that = this, optionLabel;
+    
+    if(that.get('optionLabelPath')) {
+      optionLabel = option[that.get('optionLabelPath')];
+    } else {
+      if(that.get('optionValuePath')) {
+        optionLabel = option[that.get('optionValuePath')];
+      } else {
+        optionLabel = option;
+      }
+    }
+    
+    return optionLabel;
+  },
   
   /*
    * Checks to see if a value is selected
