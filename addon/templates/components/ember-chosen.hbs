@@ -11,15 +11,17 @@
         {{#each group.options as |opt|}}
           <option value={{lookup-attr opt optionValuePath}}>{{lookup-attr opt optionLabelPath}}</option>
         {{else}}
-          <option disabled>No Options</option>
+          <option disabled>No Options Available</option>
         {{/each}}
       </optgroup>
+    {{else}}
+      <option disabled>No Options Available</option>
     {{/each}}
   {{else}}
     {{#each options as |option|}}
       <option value={{lookup-attr option optionValuePath}}>{{lookup-attr option optionLabelPath}}</option>
     {{else}}
-      <option disabled>No Options</option>
+      <option disabled>No Options Available</option>
     {{/each}}
   {{/if}}
 {{/if}}

@@ -39,6 +39,10 @@ export default Ember.Component.extend({
       var that = this,
         options = Ember.A();
       
+      if(!that.get('content')) {
+        return options;
+      }
+      
       if(that.get('optionGroupPath')) {
         that.get('groups').forEach(function(group) {
           options.push({
