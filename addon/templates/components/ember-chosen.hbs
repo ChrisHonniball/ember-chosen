@@ -1,0 +1,25 @@
+{{#unless skipEmptyItem}}
+  <option></option>
+{{/unless}}
+
+{{#if invalidAttrs}}
+  <option disabled>Invalid Attributes</option>
+{{else}}
+  {{#if optionGroupPath}}
+    {{#each options as |group|}}
+      <optgroup label={{group.label}}>
+        {{#each group.options as |opt|}}
+          <option value={{lookup-attr opt optionValuePath}}>{{lookup-attr opt optionLabelPath}}</option>
+        {{else}}
+          <option disabled>No Options</option>
+        {{/each}}
+      </optgroup>
+    {{/each}}
+  {{else}}
+    {{#each options as |option|}}
+      <option value={{lookup-attr option optionValuePath}}>{{lookup-attr option optionLabelPath}}</option>
+    {{else}}
+      <option disabled>No Options</option>
+    {{/each}}
+  {{/if}}
+{{/if}}
