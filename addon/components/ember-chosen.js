@@ -102,7 +102,7 @@ export default Ember.Component.extend({
   groups: Ember.computed.uniq('groupNames'),
   
   /*
-   * Gathers all the group names based on the optionGroupPath.
+   * Gathers all the sent values based on the content.
    */
   contentValues: Ember.computed.map('content', function(option) {
     return String(option[this.get('optionValuePath')]);
