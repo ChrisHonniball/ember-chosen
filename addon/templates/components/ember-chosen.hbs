@@ -1,27 +1,31 @@
-{{#unless skipEmptyItem}}
-  <option></option>
-{{/unless}}
-
-{{#if invalidAttrs}}
-  <option disabled>Invalid Attributes</option>
+{{#if hasBlock}}
+  {{yield}}
 {{else}}
-  {{#if optionGroupPath}}
-    {{#each options as |group|}}
-      <optgroup label={{group.label}}>
-        {{#each group.options as |option|}}
-          <option value={{option.value}} selected="{{if option.selected 'selected'}}">{{option.label}}</option>
-        {{else}}
-          <option disabled>No Options Available</option>
-        {{/each}}
-      </optgroup>
-    {{else}}
-      <option disabled>No Options Available</option>
-    {{/each}}
+  {{#unless skipEmptyItem}}
+    <option></option>
+  {{/unless}}
+
+  {{#if invalidAttrs}}
+    <option disabled>Invalid Attributes</option>
   {{else}}
-    {{#each options as |option|}}
-      <option value={{option.value}} selected="{{if option.selected 'selected'}}">{{option.label}}</option>
+    {{#if optionGroupPath}}
+      {{#each options as |group|}}
+        <optgroup label={{group.label}}>
+          {{#each group.options as |option|}}
+            <option value={{option.value}} selected="{{if option.selected 'selected'}}">{{option.label}}</option>
+          {{else}}
+            <option disabled>No Options Available</option>
+          {{/each}}
+        </optgroup>
+      {{else}}
+        <option disabled>No Options Available</option>
+      {{/each}}
     {{else}}
-      <option disabled>No Options Available</option>
-    {{/each}}
+      {{#each options as |option|}}
+        <option value={{option.value}} selected="{{if option.selected 'selected'}}">{{option.label}}</option>
+      {{else}}
+        <option disabled>No Options Available</option>
+      {{/each}}
+    {{/if}}
   {{/if}}
 {{/if}}

@@ -26,3 +26,19 @@
   value=value2
   action="save"
 }}
+
+<div>value: {{value2}}</div>
+
+{{#ember-chosen
+  id="test-chosen-3"
+  placeholder="Select Some Things..."
+  value=value3
+  allowSingleDeselect=true
+  action="save"
+}}
+  <option></option>
+  <option value="Test 1">Test 1</option>
+  <option value="Test 2">Test 2</option>
+{{/ember-chosen}}
+
+<div>value: {{value3}}</div>

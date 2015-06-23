@@ -13,4 +13,7 @@ var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 var app = new EmberAddon();
 
+app.import('vendor/chosen/chosen-sprite.png', { destDir: 'assets' });
+app.import('vendor/chosen/chosen-sprite@2x.png', { destDir: 'assets' });
+
 module.exports = app.toTree();

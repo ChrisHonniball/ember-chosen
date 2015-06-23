@@ -102,7 +102,7 @@ export default Ember.Component.extend({
   groups: Ember.computed.uniq('groupNames'),
   
   /*
-   * Gathers all the sent values based on the content.
+   * Gathers all the group names based on the optionGroupPath.
    */
   contentValues: Ember.computed.map('content', function(option) {
     return String(option[this.get('optionValuePath')]);
@@ -129,7 +129,7 @@ export default Ember.Component.extend({
               value: option[that.get('optionValuePath')],
               label: option[that.get('optionLabelPath')],
               selected: that._checkSelected(option[that.get('optionValuePath')])
-            })
+            });
           });
           
           options.push({
@@ -229,10 +229,6 @@ export default Ember.Component.extend({
   //! Events //
   /////////////
   
-  willInsertElement: function() {
-    this._checkAttrs();
-  },
-  
   didInsertElement: function(){
     this._setup();
   },
@@ -258,7 +254,7 @@ export default Ember.Component.extend({
    */
   _checkSelected: function(value) {
     var that = this,
-      value = String(value),
+      valueStr = String(value),
       selectedValue = that.get('value'),
       selected = false;
     
@@ -267,7 +263,7 @@ export default Ember.Component.extend({
         selected = true;
       }
     } else {
-      if(value === String(selectedValue)) {
+      if(valueStr === String(selectedValue)) {
         selected = true;
       }
     }
@@ -276,53 +272,12 @@ export default Ember.Component.extend({
   },
   
   /*
-   * Checks for required attributes for creating the options for the select box.
-   */
-  _checkAttrs: function() {
-    var that = this,
-      requiredAttrs = ['optionValuePath', 'optionLabelPath'],
-      missingAttrs = [];
-    
-    requiredAttrs.forEach(function(attr) {
-      if(that.get(attr) === "") {
-        missingAttrs.push(attr);
-      }
-    });
-    
-    if(missingAttrs.length > 0) {
-      that.setProperties({
-        invalidAttrs: true,
-        error: "Missing required attributes: " + missingAttrs.join(', ')
-      });
-    }
-  },
-  
-  /*
    * Initializes the chosen select.
    */
   _setup: function(){
     var that = this;
     
-    if(that.get('invalidAttrs')) {
-      /* */
-      console.log(
-        "%c%s#_setup %s",
-        "color: red;", // http://www.w3schools.com/html/html_colornames.asp
-        that.toString(),
-        that.get('error')
-      );
-      //*/
-    } else {
-      /*  /
-      console.log(
-        "%c%s#_setup settings: %O",
-        "color: purple", // http://www.w3schools.com/html/html_colornames.asp
-        that.toString(),
-        that.get('settings')
-      );
-      //*/
-      that.$().chosen(that.get('settings')).change(Ember.$.proxy(that.change, that));
-    }
+    that.$().chosen(that.get('settings'));
   },
   
   /*
