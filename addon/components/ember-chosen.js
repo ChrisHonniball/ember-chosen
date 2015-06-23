@@ -8,27 +8,33 @@ export default Ember.Component.extend({
   classNames: ['ember-chosen'],
   classNameBindings: ['isRTL:chosen-rtl'],
   
-  attributeBindings: ['prompt:data-placeholder', 'multiple'],
+  attributeBindings: ['multiple', 'disabled'],
   
   
   ////////////////
   //! Variables //
   ////////////////
   
+  isRTL: false,
+  
+  multiple: false,
+  
+  disabled: false,
+  
   /*
-   * The path of the grouping for optgroups.
+   * The content path where the group name is located.
    * OPTIONAL
    */
   optionGroupPath: "",
   
   /*
-   * The path of the value within the content array.
+   * The content path where the value is located.
    * REQUIRED
    */
   optionValuePath: "",
   
   /*
-   * The path of the label within the content array.
+   * The content path where the label is located. 
    * REQUIRED
    */
   optionLabelPath: "",
@@ -68,7 +74,7 @@ export default Ember.Component.extend({
   disableSearch: false,
   disableSearchThreshold: 0,
   enableSplitWordSearch: true,
-  inheritSelectClasses: false,
+  inheritSelectClasses: true,
   maxSelectedOptions: "Infinity",
   noResultsText: "No Results Match",
   searchContains: false,
@@ -154,9 +160,10 @@ export default Ember.Component.extend({
    * Reformatts the camelized properties to underscired settings for chosen.
    */
   settings: Ember.computed(
-    'prompt',
     'isRtl',
     'multiple',
+    'disabled',
+    'placeholder',
     'allowSingleDeselect',
     'disableSearch',
     'disableSearchThreshold',
