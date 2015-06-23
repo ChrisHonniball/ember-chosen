@@ -1,0 +1,1 @@
+export { default } from 'ember-chosen/blueprints/ember-chosen';

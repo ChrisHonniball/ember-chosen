@@ -102,6 +102,13 @@ export default Ember.Component.extend({
   groups: Ember.computed.uniq('groupNames'),
   
   /*
+   * Gathers all the group names based on the optionGroupPath.
+   */
+  contentValues: Ember.computed.map('content', function(option) {
+    return String(option[this.get('optionValuePath')]);
+  }),
+  
+  /*
    * Built options from the content sent in to the ember-select.
    */
   options: Ember.computed('content', 'optionValuePath', 'optionLabelPath', 'optionGroupPath', {
@@ -115,9 +122,19 @@ export default Ember.Component.extend({
       
       if(that.get('optionGroupPath')) {
         that.get('groups').forEach(function(group) {
+          var groupOptions = [];
+          
+          that.get('content').filterBy(that.get('optionGroupPath'), group).forEach(function(option) {
+            groupOptions.push({
+              value: option[that.get('optionValuePath')],
+              label: option[that.get('optionLabelPath')],
+              selected: that._checkSelected(option[that.get('optionValuePath')])
+            })
+          });
+          
           options.push({
             label: group,
-            options: that.get('content').filterBy(that.get('optionGroupPath'), group)
+            options: groupOptions
           });
         });
       } else {
@@ -125,17 +142,19 @@ export default Ember.Component.extend({
         that.get('content').forEach(function(option) {
           options.push({
             value: option[that.get('optionValuePath')],
-            label: option[that.get('optionLabelPath')]
+            label: option[that.get('optionLabelPath')],
+            selected: that._checkSelected(option[that.get('optionValuePath')])
           });
         });
       }
       
       /*  /
       console.log(
-        "%c%s#options: %O",
+        "%c%s#options: %O, value: %O",
         "color: purple", // http://www.w3schools.com/html/html_colornames.asp
         that.toString(),
-        options
+        options,
+        that.get('value')
       );
       //*/
       
@@ -233,6 +252,28 @@ export default Ember.Component.extend({
   ////////////////
   //! Functions //
   ////////////////
+  
+  /*
+   * Checks to see if a value is selected
+   */
+  _checkSelected: function(value) {
+    var that = this,
+      value = String(value),
+      selectedValue = that.get('value'),
+      selected = false;
+    
+    if(Ember.$.isArray(value)){
+      if(Ember.$.inArray(value, selectedValue) !== -1) {
+        selected = true;
+      }
+    } else {
+      if(value === String(selectedValue)) {
+        selected = true;
+      }
+    }
+    
+    return selected;
+  },
   
   /*
    * Checks for required attributes for creating the options for the select box.

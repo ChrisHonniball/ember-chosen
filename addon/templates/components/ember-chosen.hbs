@@ -8,8 +8,8 @@
   {{#if optionGroupPath}}
     {{#each options as |group|}}
       <optgroup label={{group.label}}>
-        {{#each group.options as |opt|}}
-          <option value={{lookup-attr opt optionValuePath}}>{{lookup-attr opt optionLabelPath}}</option>
+        {{#each group.options as |option|}}
+          <option value={{option.value}} selected="{{if option.selected 'selected'}}">{{option.label}}</option>
         {{else}}
           <option disabled>No Options Available</option>
         {{/each}}
@@ -19,7 +19,7 @@
     {{/each}}
   {{else}}
     {{#each options as |option|}}
-      <option value={{lookup-attr option optionValuePath}}>{{lookup-attr option optionLabelPath}}</option>
+      <option value={{option.value}} selected="{{if option.selected 'selected'}}">{{option.label}}</option>
     {{else}}
       <option disabled>No Options Available</option>
     {{/each}}

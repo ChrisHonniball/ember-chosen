@@ -1,7 +1,7 @@
 /* jshint node: true */
 'use strict';
 
-var pickFiles = require('broccoli-static-compiler');
+var pickFiles = require('broccoli-funnel');
 var merge = require('lodash.merge');
 
 module.exports = {
@@ -21,10 +21,10 @@ module.exports = {
     app.options['ember-chosen'] = options;
 
     // Import the correct JS for chosen
-    app.import(app.bowerDirectory + '/chosen/chosen.' + options.chosenJSType + '.js');
+    app.import(app.bowerDirectory + '/chosen/chosen.' + options.chosenJSType + '.min.js');
 
     // Import Chosen CSS (done by default)
-    if(options.importChosenCSS) { app.import(app.bowerDirectory + '/chosen/chosen.css'); }
+    if(options.importChosenCSS) { app.import(app.bowerDirectory + '/chosen/chosen.min.css'); }
   },
   treeForPublic: function(treeName) {
     var tree;
