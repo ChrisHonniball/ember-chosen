@@ -15,27 +15,95 @@ export default Ember.Component.extend({
   //! Variables //
   ////////////////
   
+  /*
+   * The path of the grouping for optgroups.
+   * OPTIONAL
+   */
   optionGroupPath: "",
+  
+  /*
+   * The path of the value within the content array.
+   * REQUIRED
+   */
   optionValuePath: "",
+  
+  /*
+   * The path of the label within the content array.
+   * REQUIRED
+   */
   optionLabelPath: "",
   
+  /*
+   * Hides the empty option.
+   */
   skipEmptyItem: false,
   
+  /*
+   * Content that is sent to the ember-chosen.
+   * This is used to build the options array.
+   */
   content: Ember.A(),
   
+  /*
+   * The action to execute on change.
+   */
   action: "",
+  
+  
+  ///////////////
+  //! Settings //
+  ///////////////
+  
+  /*
+   * Placeholder text for both the multiple version of the chosen
+   * and the single version.
+   */
+  placeholder: "Select an Option",
+  
+  /*
+   * Chosen default options.
+   * Reference: http://harvesthq.github.io/chosen/options.html
+   */
+  allowSingleDeselect: false,
+  disableSearch: false,
+  disableSearchThreshold: 0,
+  enableSplitWordSearch: true,
+  inheritSelectClasses: false,
+  maxSelectedOptions: "Infinity",
+  noResultsText: "No Results Match",
+  searchContains: false,
+  singleBackstrokeDelete: true,
+  width: "100%",
+  displayDisabledOptions: true,
+  displaySelectedOptions: true,
+  includeGroupLabelInSelected: false,
+  
+  /*
+   * Aliased properties to the placeholder for easier setting.
+   */
+  placeholderTextMultiple: Ember.computed.alias('placeholder'),
+  placeholderTextSingle: Ember.computed.alias('placeholder'),
   
   
   ///////////////
   //! Computed //
   ///////////////
   
+  /*
+   * Gathers all the group names based on the optionGroupPath.
+   */
   groupNames: Ember.computed.map('content', function(option) {
     return option[this.get('optionGroupPath')];
   }),
   
+  /*
+   * Unique group names from the content provided.
+   */
   groups: Ember.computed.uniq('groupNames'),
   
+  /*
+   * Built options from the content sent in to the ember-select.
+   */
   options: Ember.computed('content', 'optionValuePath', 'optionLabelPath', 'optionGroupPath', {
     get: function(){
       var that = this,
@@ -75,34 +143,10 @@ export default Ember.Component.extend({
     }
   }),
   
-  
-  ///////////////
-  //! Settings //
-  ///////////////
-  
-  placeholder: "Select an Option",
-  
   /*
-   * Chosen default options: http://harvesthq.github.io/chosen/options.html
+   * Initializes the settings for th chosen select box.
+   * Reformatts the camelized properties to underscired settings for chosen.
    */
-  allowSingleDeselect: false,
-  disableSearch: false,
-  disableSearchThreshold: 0,
-  enableSplitWordSearch: true,
-  inheritSelectClasses: false,
-  maxSelectedOptions: "Infinity",
-  noResultsText: "No Results Match",
-  
-  placeholderTextMultiple: Ember.computed.alias('placeholder'),
-  placeholderTextSingle: Ember.computed.alias('placeholder'),
-  
-  searchContains: false,
-  singleBackstrokeDelete: true,
-  width: "100%",
-  displayDisabledOptions: true,
-  displaySelectedOptions: true,
-  includeGroupLabelInSelected: false,
-  
   settings: Ember.computed(
     'prompt',
     'isRtl',
@@ -149,6 +193,7 @@ export default Ember.Component.extend({
       for(var prop in properties){
         if( !properties.hasOwnProperty(prop) ){ continue; }
         
+        // Convert the camelized properties to underscored for chosen.
         settings[Ember.String.underscore(prop)] = properties[prop];
       }
       
@@ -160,6 +205,38 @@ export default Ember.Component.extend({
     }
   ),
   
+  
+  /////////////
+  //! Events //
+  /////////////
+  
+  willInsertElement: function() {
+    this._checkAttrs();
+  },
+  
+  didInsertElement: function(){
+    this._setup();
+  },
+  
+  willDestroyElement: function(){
+    this._teardown();
+  },
+  
+  /*
+   * Default change event. Linked to the chosen change event.
+   */
+  change: function(){
+    this.send('valueUpdate', this.$().val());
+  },
+  
+  
+  ////////////////
+  //! Functions //
+  ////////////////
+  
+  /*
+   * Checks for required attributes for creating the options for the select box.
+   */
   _checkAttrs: function() {
     var that = this,
       requiredAttrs = ['optionValuePath', 'optionLabelPath'],
@@ -179,6 +256,9 @@ export default Ember.Component.extend({
     }
   },
   
+  /*
+   * Initializes the chosen select.
+   */
   _setup: function(){
     var that = this;
     
@@ -204,24 +284,11 @@ export default Ember.Component.extend({
     }
   },
   
+  /*
+   * Destroys the chosen select.
+   */
   _teardown: function(){
     this.$().chosen('destroy');
-  },
-  
-  willInsertElement: function() {
-    this._checkAttrs();
-  },
-  
-  didInsertElement: function(){
-    this._setup();
-  },
-  
-  willDestroyElement: function(){
-    this._teardown();
-  },
-  
-  change: function(){
-    this.send('valueUpdate', this.$().val());
   },
   
   
@@ -230,6 +297,9 @@ export default Ember.Component.extend({
   //////////////
   
   actions: {
+    /*
+     * Handles setting the value when the select box's value changes.
+     */
     valueUpdate: function(value){
       this.set('value', value);
       
