@@ -7,9 +7,9 @@ This project in currently a work-in-progress.
 ```handlebars
 {{ember-chosen
   content=someOpts
-  optionValuePath="user_id"
-  optionLabelPath="contact_fullname"
-  optionGroupPath="status"
+  optionValuePath="value"
+  optionLabelPath="label"
+  optionGroupPath="group"
   value=model.user_id
   action="save"
 }}
