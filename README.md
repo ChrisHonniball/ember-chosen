@@ -1,25 +1,16 @@
-# Ember-chosen
+# Ember-Chosen
 
-This README outlines the details of collaborating on this Ember addon.
+This project in currently a work-in-progress.
 
-## Installation
+## Usage
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
-
-## Running
-
-* `ember server`
-* Visit your app at http://localhost:4200.
-
-## Running Tests
-
-* `ember test`
-* `ember test --server`
-
-## Building
-
-* `ember build`
-
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+```handlebars
+{{ember-chosen
+  content=someOpts
+  optionValuePath="user_id"
+  optionLabelPath="contact_fullname"
+  optionGroupPath="status"
+  value=model.user_id
+  action="save"
+}}
+```
