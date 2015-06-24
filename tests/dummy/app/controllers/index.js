@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  grouping: '',
+  grouping: 'test_group',
   
   options: Ember.A([
     { label: "Label 1", value: "Value 1", group: "Group A", alt_group: "Alt Group A" },

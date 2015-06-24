@@ -48,7 +48,7 @@ export default Ember.Component.extend({
    * Content that is sent to the ember-chosen.
    * This is used to build the options array.
    */
-  content: Ember.A(),
+  content: null,
   
   /*
    * The action to execute on change.
@@ -106,7 +106,7 @@ export default Ember.Component.extend({
         groups = Ember.$.unique(groupNames);
       
       if(!that.get('content')) {
-        return options;
+        return null;
       }
       
       if(that.get('optionGroupPath')) {
@@ -309,6 +309,33 @@ export default Ember.Component.extend({
   _setup: function(){
     var that = this;
     
+    // If there is no content assume that we are using block content and attempt to select the appropriate option.
+    if(!that.get('content')) {
+      // Look for the selection via it's value.
+      var foundSelectedOption = that.$('option[value="' + that.get('value') + '"]');
+      
+      // If not found, look for selection via it's HTML content.
+      if(foundSelectedOption.length === 0){
+        foundSelectedOption = that.$('option').filter(function() {
+          return Ember.$(this).html() === that.get('value');
+        });
+      }
+      
+      if(foundSelectedOption.length === 0){
+        // If still not found, log notification.
+        console.log(
+          "%c%s#_setup unable to select option with a value or text of `%s`.",
+          "color: red", // http://www.w3schools.com/html/html_colornames.asp
+          that.toString(),
+          that.get('value')
+        );
+      } else {
+        // If found, select the option.
+        foundSelectedOption.attr('selected', true);
+      }
+    }
+    
+    // Initialize the select box.
     that.$().chosen(that.get('settings'));
   },
   
