@@ -2,34 +2,4 @@
 
 This project in currently a work-in-progress.
 
-## Installation
-
-```
-ember install:addon ember-chosen
-```
-
-## Usage
-
-```javascript
-// Your controller/component...
-export default Ember.Controller.extend({
-  selection: "test",
-  
-  someOpts: [
-    { label: "something", value: "something" },
-    { label: "to", value: "to" },
-    { label: "test", value: "test" }
-  ]
-});
-```
-
-```handlebars
-{{ember-chosen
-  content=someOpts
-  optionValuePath="value"
-  optionLabelPath="label"
-  optionGroupPath="group"
-  value=selection
-  action="save"
-}}
-```
+[Documentation](https://chrishonniball.github.io/ember-chosen)
