@@ -108,7 +108,7 @@ export default Ember.Component.extend({
         return false;
       }
       
-      if(firstObject[that.get('optionGroupPath')]) {
+      if(firstObject.hasOwnProperty(that.get('optionGroupPath'))) {
         validGroupPath = true;
       } else {
         console.log(
