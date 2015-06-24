@@ -8,7 +8,7 @@
   {{#if invalidAttrs}}
     <option disabled>Invalid Attributes</option>
   {{else}}
-    {{#if optionGroupPath}}
+    {{#if validGroupPath}}
       {{#each options as |group|}}
         <optgroup label={{group.label}}>
           {{#each group.options as |option|}}

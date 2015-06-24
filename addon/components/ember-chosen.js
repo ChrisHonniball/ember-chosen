@@ -8,7 +8,7 @@ export default Ember.Component.extend({
   classNames: ['ember-chosen'],
   classNameBindings: ['isRTL:chosen-rtl'],
   
-  attributeBindings: ['multiple', 'disabled'],
+  attributeBindings: ['multiple', 'disabled', 'style'],
   
   
   ////////////////
@@ -96,20 +96,54 @@ export default Ember.Component.extend({
   ///////////////
   
   /*
+   * Validates the optionGroupPath in the content array.
+   */
+  validGroupPath: Ember.computed('optionGroupPath', {
+    get: function(){
+      var that = this,
+        validGroupPath,
+        firstObject = that.get('content.firstObject');
+      
+      if(!that.get('optionGroupPath')) {
+        return false;
+      }
+      
+      if(firstObject[that.get('optionGroupPath')]) {
+        validGroupPath = true;
+      } else {
+        console.log(
+          "%c%s#validGroupPath Invalid optionGroupPath `%s`.",
+          "color: red", // http://www.w3schools.com/html/html_colornames.asp
+          that.toString(),
+          that.get('optionGroupPath')
+        );
+        
+        validGroupPath = false;
+      }
+      
+      return validGroupPath;
+    }
+  }),
+  
+  /*
    * Built options from the content sent in to the ember-select.
    */
   options: Ember.computed('content', 'optionValuePath', 'optionLabelPath', 'optionGroupPath', {
     get: function(){
       var that = this,
-        options = Ember.A(),
-        groupNames = that.get('content').mapBy(this.get('optionGroupPath')),
-        groups = Ember.$.unique(groupNames);
+        groupNames = [],
+        groups = [],
+        options = Ember.A();
       
       if(!that.get('content')) {
         return null;
       }
       
-      if(that.get('optionGroupPath')) {
+      if(that.get('validGroupPath')) {
+        groupNames = that.get('content').mapBy(this.get('optionGroupPath'));
+        groups = Ember.$.unique(groupNames);
+         
+        // Build the options with groups
         groups.forEach(function(group) {
           var groupOptions = [];
           
@@ -147,9 +181,7 @@ export default Ember.Component.extend({
       );
       //*/
       
-      Ember.run.next(that, function(){
-        that.$().trigger("chosen:updated");
-      });
+      that._updateChosen();
       
       return options;
     }
@@ -210,13 +242,20 @@ export default Ember.Component.extend({
         settings[Ember.String.underscore(prop)] = properties[prop];
       }
       
-      Ember.run.next(this, function(){
-        this.$().trigger("chosen:updated");
-      });
+      that._updateChosen();
       
       return settings;
     }
   ),
+  
+  style: Ember.computed({
+    get: function(){
+      var that = this,
+        style = String('width: ' + that.get('width'));
+      
+      return Ember.String.htmlSafe(style);
+    }
+  }),
   
   
   /////////////
@@ -242,6 +281,25 @@ export default Ember.Component.extend({
   ////////////////
   //! Functions //
   ////////////////
+  
+  /*
+   * Updates the chosen select box.
+   */
+  _updateChosen: function() {
+    var that = this;
+    
+    Ember.run.next(that, function(){
+      /*  /
+      console.log(
+        "%c%s#_updateChosen...",
+        "color: purple", // http://www.w3schools.com/html/html_colornames.asp
+        that.toString()
+      );
+      //*/
+      
+      that.$().trigger("chosen:updated");
+    });
+  },
   
   /*
    * Looks up the option's value
