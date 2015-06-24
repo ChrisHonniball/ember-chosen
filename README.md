@@ -2,6 +2,12 @@
 
 This project in currently a work-in-progress.
 
+## Installation
+
+```
+ember install:addon ember-chosen
+```
+
 ## Usage
 
 ```javascript
