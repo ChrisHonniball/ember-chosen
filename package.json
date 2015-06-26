@@ -1,6 +1,6 @@
 {
   "name": "ember-chosen",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Use Chosen select boxes in your ember project.",
   "directories": {
     "doc": "doc",
@@ -15,7 +15,7 @@
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Chris Honniball",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.2",
@@ -35,7 +35,9 @@
     "ember-try": "0.0.6"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "chosen",
+    "harvest"
   ],
   "dependencies": {
     "broccoli-funnel": "^0.2.3",
@@ -45,6 +47,6 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
-    "demoURL": "http://chrishonniball.github.io/ember-chosen/"
+    "demoURL": "http://chrishonniball.github.io/ember-chosen"
   }
 }
