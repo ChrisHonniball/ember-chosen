@@ -1,186 +1,196 @@
 <h2>Options</h2>
 
-<table class="table table-condensed table-hover">
-  <thead>
-    <tr>
-      <th style="width: 25%;">Option</th>
-      <th style="width: 35%;">Default [Type]</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>optionGroupPath</th>
-      <td><code>""</code> [string]</td>
-      <td>The content path where the group name is located.</td>
-    </tr>
-    <tr>
-      <th>optionValuePath</th>
-      <td><code>""</code> [string]</td>
-      <td>The content path where the value is located.</td>
-    </tr>
-    <tr>
-      <th>optionLabelPath</th>
-      <td><code>""</code> [string]</td>
-      <td>The content path where the label is located.</td>
-    </tr>
-    <tr>
-      <th>skipEmptyItem</th>
-      <td><code>false</code> [boolean]</td>
-      <td>Skips adding an empty <code>&lt;option&gt;</code> as the first element in the select box. Chosen requires that an empty <code>&lt;option&gt;</code> be present to enable the <code>allowSingleDeselect</code> option.</td>
-    </tr>
-    <tr>
-      <th>content</th>
-      <td><code>null</code> [Ember Array]</td>
-      <td>This content that is to be used as options in the select box. <strong>Ember-Chosen</strong> reformats the options on setup or when the content changes.</td>
-    </tr>
-    <tr>
-      <th>action</th>
-      <td><code>""</code> [string]</td>
-      <td>The action to sent back to the application.</td>
-    </tr>
-    <tr>
-      <th>placeholder</th>
-      <td><code>""</code> [string]</td>
-      <td>The placeholder when no option is selected on the <strong>Ember-Chosen</strong>.</td>
-    </tr>
-  </tbody>
-</table>
 
-<table class="table table-condensed table-hover">
-  <thead>
-    <tr>
-      <th style="width: 25%;"><em>Camelized</em> Chosen Option</th>
-      <th style="width: 35%;">Default [Type]</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>allowSingleDeselect</th>
-      <td><code>false</code> [boolean]</td>
-      <td>When set to <code>true</code> on a single select, Chosen adds a UI element which selects the first element (if it is blank). Requires <code>skipEmptyItem</code> to be <code>false</code>.</td>
-    </tr>
-    <tr>
-      <th>disableSearch</th>
-      <td><code>false</code> [boolean]</td>
-      <td>When set to <code>true</code>, Chosen will not display the search field (single selects only).</td>
-    </tr>
-    <tr>
-      <th>disableSearchThreshold</th>
-      <td><code>0</code> [number]</td>
-      <td>Hide the search input on single selects if there are fewer than (n) options.</td>
-    </tr>
-    <tr>
-      <th>enableSplitWordSearch</th>
-      <td><code>true</code> [boolean]</td>
-      <td>By default, searching will match on any word within an option tag. Set this option to <code>false</code> if you want to only match on the entire text of an option tag.</td>
-    </tr>
-    <tr>
-      <th>inheritSelectClasses</th>
-      <td><code>true</code> [boolean]</td>
-      <td>When set to <code>true</code>, Chosen will grab any classes on the original select field and add them to Chosen’s container div.</td>
-    </tr>
-    <tr>
-      <th>maxSelectedOptions</th>
-      <td><code>"Infinity"</code> [number]</td>
-      <td>Limits how many options the user can select.</td>
-    </tr>
-    <tr>
-      <th>noResultsText</th>
-      <td><code>"No Results Match"</code> [string]</td>
-      <td>The text to be displayed when no matching results are found. The current search is shown at the end of the text.</td>
-    </tr>
-    <tr>
-      <th>searchContains</th>
-      <td><code>false</code> [boolean]</td>
-      <td>By default, Chosen’s search matches starting at the beginning of a word. Setting this option to <code>true</code> allows matches starting from anywhere within a word. This is especially useful for options that include a lot of special characters or phrases in ()s and []s.</td>
-    </tr>
-    <tr>
-      <th>singleBackstrokeDelete</th>
-      <td><code>true</code> [boolean]</td>
-      <td>By default, pressing delete/backspace on multiple selects will remove a selected choice. When <code>false</code>, pressing delete/backspace will highlight the last choice, and a second press deselects it.</td>
-    </tr>
-    <tr>
-      <th>width</th>
-      <td><code>"100%"</code> [string]</td>
-      <td>The width of the Chosen select box. By default, Chosen attempts to match the width of the select box you are replacing. If your select is hidden when Chosen is instantiated, you must specify a width or the select will show up with a width of 0.</td>
-    </tr>
-    <tr>
-      <th>displayDisabledOptions</th>
-      <td><code>true</code> [boolean]</td>
-      <td>By default, Chosen includes disabled options in search results with a special styling. Setting this option to <code>false</code> will hide disabled results and exclude them from searches.</td>
-    </tr>
-    <tr>
-      <th>displaySelectedOptions</th>
-      <td><code>true</code> [boolean]</td>
-      <td>
-        <p>By default, Chosen includes selected options in search results with a special styling. Setting this option to false will hide selected results and exclude them from searches.</p>
+<h3>ember-chosen options</h3>
+<hr>
+<dl class="dl-horizontal">
+  <dt>optionGroupPath</dt>
+  <dd>The content path where the group name is located.</dd>
+  <dt><span class="small text-muted">string</span></dt>
+  <dd><code>""</code></dd>
+  
+  <dd class="clearfix">&nbsp;</dd>
+  
+  <dt>optionValuePath</dt>
+  <dd>The content path where the value is located.</dd>
+  <dt><span class="small text-muted">string</span></dt>
+  <dd><code>""</code></dd>
+  
+  <dd class="clearfix">&nbsp;</dd>
+  
+  <dt>optionLabelPath</dt>
+  <dd>The content path where the label is located.</dd>
+  <dt><span class="small text-muted">string</span></dt>
+  <dd><code>""</code></dd>
+  
+  <dd class="clearfix">&nbsp;</dd>
+  
+  <dt>skipEmptyItem</dt>
+  <dd>Skips adding an empty <code>&lt;option&gt;</code> as the first element in the select box. Chosen requires that an empty <code>&lt;option&gt;</code> be present to enable the <code>allowSingleDeselect</code> option.</dd>
+  <dt><span class="small text-muted">boolean</span></dt>
+  <dd><code>false</code></dd>
+  
+  <dd class="clearfix">&nbsp;</dd>
+  
+  <dt>content</dt>
+  <dd>This content that is to be used as options in the select box. <strong>Ember-Chosen</strong> reformats the options on setup or when the content changes.</dd>
+  <dt><span class="small text-muted">Ember Array</span></dt>
+  <dd><code>null</code></dd>
+  
+  <dd class="clearfix">&nbsp;</dd>
+  
+  <dt>action</dt>
+  <dd>The action to sent back to the application.</dd>
+  <dt><span class="small text-muted">string</span></dt>
+  <dd><code>""</code></dd>
+  
+  <dd class="clearfix">&nbsp;</dd>
+  
+  <dt>placeholder</dt>
+  <td>The placeholder when no option is selected on the <strong>Ember-Chosen</strong>.</td>
+  <dt><span class="small text-muted">string</span></dt>
+  <dd><code>""</code></dd>
+</dl>
 
-        <p><strong>Note</strong>: this is for multiple selects only. In single selects, the selected result will always be displayed.</p>
-      </td>
-    </tr>
-    <tr>
-      <th>includeGroupLabelInSelected</th>
-      <td><code>false</code> [boolean]</td>
-      <td>By default, Chosen only shows the text of a selected option. Setting this option to <code>true</code> will show the text and group (if any) of the selected option.</td>
-    </tr>
-    <tr>
-      <th>placeholderTextMultiple</th>
-      <td><code>Ember.computed.alias('placeholder')</code></td>
-      <td>The text to be displayed as a placeholder when no options are selected for a multiple select.</td>
-    </tr>
-    <tr>
-      <th>placeholderTextSingle</th>
-      <td><code>Ember.computed.alias('placeholder')</code></td>
-      <td>The text to be displayed as a placeholder when no options are selected for a multiple select.</td>
-    </tr>
-  </tbody>
-</table>
 
-<h2>Attributes</h2>
+<h3><em>Camelized</em> chosen options</h3>
+<hr>
+<dl class="dl-horizontal">
+  <dt>allowSingleDeselect</dt>
+  <dd>When set to <code>true</code> on a single select, Chosen adds a UI element which selects the first element (if it is blank). Requires <code>skipEmptyItem</code> to be <code>false</code>.</dd>
+  <dt><span class="small text-muted">boolean</span></dt>
+  <dd><code>false</code></dd>
+  
+  <dd class="clearfix">&nbsp;</dd>
+  
+  <dt>disableSearch</dt>
+  <dd>When set to <code>true</code>, Chosen will not display the search field (single selects only).</dd>
+  <dt><span class="small text-muted">boolean</span></dt>
+  <dd><code>false</code></dd>
+  
+  <dd class="clearfix">&nbsp;</dd>
+  
+  <dt>disableSearchThreshold</dt>
+  <dd>Hide the search input on single selects if there are fewer than (n) options.</dd>
+  <dt><span class="small text-muted">number</span></dt>
+  <dd><code>0</code></dd>
+  
+  <dd class="clearfix">&nbsp;</dd>
+  
+  <dt>enableSplitWordSearch</dt>
+  <dd>By default, searching will match on any word within an option tag. Set this option to <code>false</code> if you want to only match on the entire text of an option tag.</dd>
+  <dt><span class="small text-muted">boolean</span></dt>
+  <dd><code>true</code></dd>
+  
+  <dd class="clearfix">&nbsp;</dd>
+  
+  <dt>inheritSelectClasses</dt>
+  <dd>When set to <code>true</code>, Chosen will grab any classes on the original select field and add them to Chosen’s container div.</dd>
+  <dt><span class="small text-muted">boolean</span></dt>
+  <dd><code>true</code></dd>
+  
+  <dd class="clearfix">&nbsp;</dd>
+  
+  <dt>maxSelectedOptions</dt>
+  <dd>Limits how many options the user can select.</dd>
+  <dt><span class="small text-muted">number</span></dt>
+  <dd><code>"Infinity"</code></dd>
+  
+  <dd class="clearfix">&nbsp;</dd>
+  
+  <dt>noResultsText</dt>
+  <dd>The text to be displayed when no matching results are found. The current search is shown at the end of the text.</dd>
+  <dt><span class="small text-muted">string</span></dt>
+  <dd><code>"No Results Match"</code></dd>
+  
+  <dd class="clearfix">&nbsp;</dd>
+  
+  <dt>searchContains</dt>
+  <dd>By default, Chosen’s search matches starting at the beginning of a word. Setting this option to <code>true</code> allows matches starting from anywhere within a word. This is especially useful for options that include a lot of special characters or phrases in ()s and []s.</dd>
+  <dt><span class="small text-muted">boolean</span></dt>
+  <dd><code>false</code></dd>
+  
+  <dd class="clearfix">&nbsp;</dd>
+  
+  <dt>singleBackstrokeDelete</dt>
+  <dd>By default, pressing delete/backspace on multiple selects will remove a selected choice. When <code>false</code>, pressing delete/backspace will highlight the last choice, and a second press deselects it.</dd>
+  <dt><span class="small text-muted">boolean</span></dt>
+  <dd><code>true</code></dd>
+  
+  <dd class="clearfix">&nbsp;</dd>
+  
+  <dt>width</dt>
+  <dd>The width of the Chosen select box. By default, Chosen attempts to match the width of the select box you are replacing. If your select is hidden when Chosen is instantiated, you must specify a width or the select will show up with a width of 0.</dd>
+  <dt><span class="small text-muted">string</span></dt>
+  <dd><code>"100%"</code></dd>
+  
+  <dd class="clearfix">&nbsp;</dd>
+  
+  <dt>displayDisabledOptions</dt>
+  <dd>By default, Chosen includes disabled options in search results with a special styling. Setting this option to <code>false</code> will hide disabled results and exclude them from searches.</dd>
+  <dt><span class="small text-muted">boolean</span></dt>
+  <dd><code>true</code></dd>
+  
+  <dd class="clearfix">&nbsp;</dd>
+  
+  <dt>displaySelectedOptions</dt>
+  <dd>
+    <p>By default, Chosen includes selected options in search results with a special styling. Setting this option to false will hide selected results and exclude them from searches.</p>
 
-<table class="table table-condensed table-hover">
-  <thead>
-    <tr>
-      <th style="width: 25%;">Attribute</th>
-      <th style="width: 35%;">Default [Type]</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>multiple</th>
-      <td><code>false</code> [boolean]</td>
-      <td>The attribute <code>multiple</code> on your select box dictates whether Chosen will render a multiple or single select.</td>
-    </tr>
-    <tr>
-      <th>disabled</th>
-      <td><code>false</code> [boolean]</td>
-      <td>Whether or not the select box is disabled/endbled.</td>
-    </tr>
-  </tbody>
-</table>
+    <p><strong>Note</strong>: this is for multiple selects only. In single selects, the selected result will always be displayed.</p>
+  </dd>
+  <dt><span class="small text-muted">boolean</span></dt>
+  <dd><code>true</code></dd>
+  
+  <dd class="clearfix">&nbsp;</dd>
+  
+  <dt>includeGroupLabelInSelected</dt>
+  <dd>By default, Chosen only shows the text of a selected option. Setting this option to <code>true</code> will show the text and group (if any) of the selected option.</dd>
+  <dt><span class="small text-muted">boolean</span></dt>
+  <dd><code>false</code></dd>
+  
+  <dd class="clearfix">&nbsp;</dd>
+  
+  <dt>placeholderTextMultiple</dt>
+  <dd>The text to be displayed as a placeholder when no options are selected for a multiple select.</dd>
+  <dt><span class="small text-muted">Ember.computed</span></dt>
+  <dd><code>Ember.computed.alias('placeholder')</code></dd>
+  
+  <dd class="clearfix">&nbsp;</dd>
+  
+  <dt>placeholderTextSingle</dt>
+  <dd>The text to be displayed as a placeholder when no options are selected for a multiple select.</dd>
+  <dt><span class="small text-muted">Ember.computed</span></dt>
+  <dd><code>Ember.computed.alias('placeholder')</code></dd>
+</dl>
 
-<h2>Classes</h2>
 
-<table class="table table-condensed table-hover">
-  <thead>
-    <tr>
-      <th style="width: 25%;">Class</th>
-      <th style="width: 35%;">Default [Type]</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>isRTL</th>
-      <td><code>false</code> [boolean]</td>
-      <td>
-        <p>Chosen supports right-to-left text in select boxes. Add the class <code>chosen-rtl</code> to your select tag to support right-to-left text options.</p>
+<h3>Attributes</h3>
+<hr>
+<dl class="dl-horizontal">
+  <dt>multiple</dt>
+  <dd>The attribute <code>multiple</code> on your select box dictates whether Chosen will render a multiple or single select.</dd>
+  <dt><span class="small text-muted">boolean</span></dt>
+  <dd><code>false</code></dd>
+  
+  <dd class="clearfix">&nbsp;</dd>
 
-        <p><strong>Note:</strong> The chosen-rtl class will pass through to the Chosen select even when the <code>inheritSelectClasses</code> option is set to <code>false</code>.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <dt>disabled</dt>
+  <dd>Whether or not the select box is disabled/endbled.</dd>
+  <dt><span class="small text-muted">boolean</span></dt>
+  <dd><code>false</code></dd>
+</dl>
+
+
+<h3>Classes</h3>
+<hr>
+<dl class="dl-horizontal">
+  <dt>isRTL</dt>
+  <dd>
+    <p>Chosen supports right-to-left text in select boxes. Add the class <code>chosen-rtl</code> to your select tag to support right-to-left text options.</p>
+
+    <p><strong>Note:</strong> The chosen-rtl class will pass through to the Chosen select even when the <code>inheritSelectClasses</code> option is set to <code>false</code>.</p>
+  </dd>
+  <dt><span class="small text-muted">boolean</span></dt>
+  <dd><code>false</code></dd>
+</dl>
