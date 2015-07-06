@@ -10,10 +10,12 @@ module.exports = {
 
     // Import the correct JS for chosen
     app.import(app.bowerDirectory + '/chosen/chosen.jquery.min.js');
+    app.import(app.bowerDirectory + '/lodash/lodash.js');
 
     // Import Chosen CSS (done by default)
     app.import(app.bowerDirectory + '/chosen/chosen.min.css');
   },
+  
   treeForPublic: function(treeName) {
     var tree;
 
@@ -23,5 +25,9 @@ module.exports = {
     });
 
     return tree;
+  },
+  
+  isDevelopingAddon: function() {
+    return true;
   }
 };

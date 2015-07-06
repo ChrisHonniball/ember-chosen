@@ -1,6 +1,6 @@
 {
   "name": "ember-chosen",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Use Chosen select boxes in your ember project.",
   "directories": {
     "doc": "doc",
@@ -41,9 +41,8 @@
   ],
   "dependencies": {
     "broccoli-funnel": "^0.2.3",
-    "ember-cli-htmlbars": "0.7.6",
     "ember-cli-babel": "^5.0.0",
-    "lodash.merge": "^3.2.1"
+    "ember-cli-htmlbars": "0.7.6"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",

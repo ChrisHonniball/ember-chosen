@@ -7,7 +7,8 @@ module.exports = {
     var that = this;
     
     return that.addBowerPackagesToProject([
-      { name: 'chosen', target: '1.4.2' }
+      { name: 'chosen', target: '1.4.2' },
+      { name: 'lodash' }
     ]);
   }
 };

@@ -102,13 +102,13 @@ export default Ember.Component.extend({
     get: function(){
       var that = this,
         validGroupPath,
-        firstObject = that.get('content.firstObject');
+        lastObject = that.get('content.lastObject');
       
       if(!that.get('optionGroupPath')) {
         return false;
       }
       
-      if(firstObject.hasOwnProperty(that.get('optionGroupPath'))) {
+      if(lastObject.hasOwnProperty(that.get('optionGroupPath'))) {
         validGroupPath = true;
       } else {
         console.log(
@@ -140,8 +140,18 @@ export default Ember.Component.extend({
       }
       
       if(that.get('validGroupPath')) {
-        groupNames = that.get('content').mapBy(this.get('optionGroupPath'));
-        groups = Ember.$.unique(groupNames);
+        groupNames = that.get('content').mapBy(that.get('optionGroupPath'));
+        groups = _.uniq(groupNames);
+        
+        /* */
+        console.log(
+          "%c%s#options creating groups: %O from %O",
+          "color: purple", // http://www.w3schools.com/html/html_colornames.asp
+          that.toString(),
+          groups,
+          groupNames
+        );
+        //*/
          
         // Build the options with groups
         groups.forEach(function(group) {
@@ -171,7 +181,7 @@ export default Ember.Component.extend({
         });
       }
       
-      /*  /
+      /* */
       console.log(
         "%c%s#options: %O, value: %O",
         "color: purple", // http://www.w3schools.com/html/html_colornames.asp

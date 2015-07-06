@@ -12,6 +12,7 @@
     "jquery": "^1.11.1",
     "loader.js": "ember-cli/loader.js#3.2.0",
     "qunit": "~1.17.1",
-    "chosen": "https://github.com/harvesthq/chosen/releases/download/1.4.2/chosen_v1.4.2.zip"
+    "chosen": "https://github.com/harvesthq/chosen/releases/download/1.4.2/chosen_v1.4.2.zip",
+    "lodash": "~3.10.0"
   }
 }
