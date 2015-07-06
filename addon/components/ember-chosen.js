@@ -143,7 +143,7 @@ export default Ember.Component.extend({
         groupNames = that.get('content').mapBy(that.get('optionGroupPath'));
         groups = _.uniq(groupNames);
         
-        /* */
+        /*  /
         console.log(
           "%c%s#options creating groups: %O from %O",
           "color: purple", // http://www.w3schools.com/html/html_colornames.asp
@@ -181,7 +181,7 @@ export default Ember.Component.extend({
         });
       }
       
-      /* */
+      /*  /
       console.log(
         "%c%s#options: %O, value: %O",
         "color: purple", // http://www.w3schools.com/html/html_colornames.asp
