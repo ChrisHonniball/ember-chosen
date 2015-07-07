@@ -128,7 +128,7 @@ export default Ember.Component.extend({
   /*
    * Built options from the content sent in to the ember-select.
    */
-  options: Ember.computed('content', 'optionValuePath', 'optionLabelPath', 'optionGroupPath', {
+  options: Ember.computed('content', 'optionValuePath', 'optionLabelPath', 'optionGroupPath', 'value', {
     get: function(){
       var that = this,
         groupNames = [],
