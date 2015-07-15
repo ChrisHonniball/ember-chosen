@@ -352,18 +352,19 @@ export default Ember.Component.extend({
   /*
    * Checks to see if a value is selected
    */
-  _checkSelected: function(value) {
+  _checkSelected: function(optionValue) {
     var that = this,
-      valueStr = String(value),
-      selectedValue = that.get('value'),
+      value = that.get('value'),
       selected = false;
     
     if(Ember.$.isArray(value)){
-      if(Ember.$.inArray(value, selectedValue) !== -1) {
+      var found = _.indexOf(value, optionValue);
+
+      if(found !== -1) {
         selected = true;
       }
     } else {
-      if(valueStr === String(selectedValue)) {
+      if(String(value) === String(optionValue)) {
         selected = true;
       }
     }
