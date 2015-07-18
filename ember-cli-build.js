@@ -8,8 +8,5 @@ module.exports = function(defaults) {
         // Any other options
     });
 
-    app.import("file1.js");
-    app.import("file2.js");
-
     return app.toTree();
 };
