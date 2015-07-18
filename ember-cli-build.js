@@ -1,10 +1,10 @@
 /* jshint node: true */
 /* global require, module */
 
-var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
-    var app = new EmberApp(defaults, {
+    var app = new EmberAddon(defaults, {
         // Any other options
     });
 
