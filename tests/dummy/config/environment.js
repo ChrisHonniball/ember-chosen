@@ -50,6 +50,9 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.baseURL = '/ember-chosen';
+    ENV['ember-cli-mirage'] = {
+      enabled: true
+    };
   }
 
   return ENV;
