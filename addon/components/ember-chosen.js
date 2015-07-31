@@ -158,6 +158,10 @@ export default Ember.Component.extend({
           var groupOptions = [];
           
           that.get('content').filterBy(that.get('optionGroupPath'), group).forEach(function(option) {
+            if(typeof option.get === "undefined" && typeof option !== "string") {
+              option = Ember.Object.create(option);
+            }
+            
             groupOptions.push({
               value: that._lookupOptionValue(option),
               label: that._lookupOptionLabel(option),
@@ -173,6 +177,10 @@ export default Ember.Component.extend({
       } else {
         // Build the options array
         that.get('content').forEach(function(option) {
+          if(typeof option.get === "undefined" && typeof option !== "string") {
+            option = Ember.Object.create(option);
+          }
+          
           options.push({
             value: that._lookupOptionValue(option),
             label: that._lookupOptionLabel(option),
@@ -315,17 +323,18 @@ export default Ember.Component.extend({
    * Looks up the option's value
    */
   _lookupOptionValue: function(option) {
-    var that = this, optionValue;
+    var that = this, optionValue,
+      lookupPath = null;
     
     if(that.get('optionValuePath')) {
-      optionValue = option[that.get('optionValuePath')];
+      lookupPath = that.get('optionValuePath');
     } else {
       if(that.get('optionLabelPath')) {
-        optionValue = option[that.get('optionLabelPath')];
-      } else {
-        optionValue = option;
+        lookupPath = that.get('optionLabelPath');
       }
     }
+    
+    optionValue = (lookupPath) ? option.get(lookupPath) : option;
     
     return optionValue;
   },
@@ -334,17 +343,18 @@ export default Ember.Component.extend({
    * Looks up the option's label
    */
   _lookupOptionLabel: function(option) {
-    var that = this, optionLabel;
+    var that = this, optionLabel,
+      lookupPath = null;
     
     if(that.get('optionLabelPath')) {
-      optionLabel = option[that.get('optionLabelPath')];
+      lookupPath = that.get('optionLabelPath');
     } else {
       if(that.get('optionValuePath')) {
-        optionLabel = option[that.get('optionValuePath')];
-      } else {
-        optionLabel = option;
+        lookupPath = that.get('optionValuePath');
       }
     }
+    
+    optionLabel = (lookupPath) ? option.get(lookupPath) : option;
     
     return optionLabel;
   },
@@ -364,8 +374,10 @@ export default Ember.Component.extend({
         selected = true;
       }
     } else {
-      if(String(value) === String(optionValue)) {
+      if(String(value) === String(optionValue) && optionValue !== undefined) {
         selected = true;
+      } else {
+        selected = false;
       }
     }
     
