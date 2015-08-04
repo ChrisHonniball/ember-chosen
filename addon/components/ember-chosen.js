@@ -189,7 +189,7 @@ export default Ember.Component.extend({
         });
       }
       
-      /*  /
+      /* */
       console.log(
         "%c%s#options: %O, value: %O",
         "color: purple", // http://www.w3schools.com/html/html_colornames.asp
