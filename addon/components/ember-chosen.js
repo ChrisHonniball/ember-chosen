@@ -1,3 +1,5 @@
+/* global _ */
+
 import Ember from 'ember';
 import layout from '../templates/components/ember-chosen';
 
@@ -189,7 +191,7 @@ export default Ember.Component.extend({
         });
       }
       
-      /* */
+      /*  /
       console.log(
         "%c%s#options: %O, value: %O",
         "color: purple", // http://www.w3schools.com/html/html_colornames.asp
