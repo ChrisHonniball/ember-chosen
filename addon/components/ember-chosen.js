@@ -143,7 +143,7 @@ export default Ember.Component.extend({
       
       if(that.get('validGroupPath')) {
         groupNames = that.get('content').mapBy(that.get('optionGroupPath'));
-        groups = _.uniq(groupNames);
+        groups = Ember.A(groupNames).uniq();
         
         /*  /
         console.log(
@@ -370,7 +370,7 @@ export default Ember.Component.extend({
       selected = false;
     
     if(Ember.$.isArray(value)){
-      var found = _.indexOf(value, optionValue);
+      var found = value.indexOf(optionValue);
 
       if(found !== -1) {
         selected = true;

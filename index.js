@@ -10,9 +10,8 @@ module.exports = {
 
     // Import the correct JS for chosen
     app.import(app.bowerDirectory + '/chosen/chosen.jquery.min.js');
-    app.import(app.bowerDirectory + '/lodash/lodash.js');
 
-    // Import Chosen CSS (done by default)
+    // Import Chosen CSS
     app.import(app.bowerDirectory + '/chosen/chosen.min.css');
   },
   
