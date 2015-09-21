@@ -316,7 +316,7 @@ export default Ember.Component.extend({
       }
     }
     
-    optionValue = (lookupPath) ? option.get(lookupPath) : option;
+    optionValue = (lookupPath) ? (typeof option.get !== 'undefined') ? option.get(lookupPath) : option[lookupPath] : option;
     
     return optionValue;
   },
@@ -336,7 +336,7 @@ export default Ember.Component.extend({
       }
     }
     
-    optionLabel = (lookupPath) ? option.get(lookupPath) : option;
+    optionLabel = (lookupPath) ? (typeof option.get !== 'undefined') ? option.get(lookupPath) : option[lookupPath] : option;
     
     return optionLabel;
   },
