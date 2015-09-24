@@ -159,8 +159,20 @@ export default Ember.Component.extend({
           let groupOptions = [];
           
           this.get('content').filterBy(this.get('optionGroupPath'), group).forEach((option) => {
-            if(typeof option.get === "undefined" && typeof option !== "string") {
-              option = Ember.Object.create(option);
+            /*  /
+            Ember.Logger.log(
+              "%c%s#option type: %s option.get type: %s %O",
+              "color: purple", // http://www.w3schools.com/html/html_colornames.asp
+              this.toString(),
+              typeof option,
+              typeof option.get,
+              option
+            );
+            //*/
+            if(typeof option.get !== "function") {
+              if(['number', 'string', 'boolean'].indexOf(typeof option) === -1) {
+                option = Ember.Object.create(option);
+              }
             }
             
             groupOptions.push({
@@ -178,8 +190,20 @@ export default Ember.Component.extend({
       } else {
         // Build the options array
         this.get('content').forEach((option) => {
-          if(typeof option.get === "undefined" && typeof option !== "string") {
-            option = Ember.Object.create(option);
+          /*  /
+          Ember.Logger.log(
+            "%c%s#option type: %s option.get type: %s %O",
+            "color: purple", // http://www.w3schools.com/html/html_colornames.asp
+            this.toString(),
+            typeof option,
+            typeof option.get,
+            option
+          );
+          //*/
+          if(typeof option.get !== "function") {
+            if(['number', 'string', 'boolean'].indexOf(typeof option) === -1) {
+              option = Ember.Object.create(option);
+            }
           }
           
           options.push({
