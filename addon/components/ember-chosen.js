@@ -321,7 +321,9 @@ export default Ember.Component.extend({
    */
   _updateChosen() {
     Ember.run.next(this, () => {
-      this.$('#ember-chosen-' + this.get('elementId')).trigger("chosen:updated");
+      if(this.$('#ember-chosen-' + this.get('elementId'))) {
+        this.$('#ember-chosen-' + this.get('elementId')).trigger("chosen:updated");
+      }
     });
   },
   
