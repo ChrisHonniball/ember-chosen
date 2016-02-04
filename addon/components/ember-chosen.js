@@ -20,6 +20,8 @@ export default Ember.Component.extend({
   
   disabled: false,
   
+  debug: false,
+  
   /*
    * The content path where the group name is located.
    * OPTIONAL
@@ -106,13 +108,24 @@ export default Ember.Component.extend({
         return false;
       }
       
-      if(lastObject.hasOwnProperty(this.get('optionGroupPath'))) {
+      if(this.get('debug')) {
+        Ember.Logger.log(
+          "%c%s#validGroupPath searching for `%s` in Object: %O",
+          "color: purple", // http://www.w3schools.com/html/html_colornames.asp
+          this.toString(),
+          this.get('optionGroupPath'),
+          lastObject
+        );
+      }
+      
+      if(typeof lastObject.get(this.get('optionGroupPath')) !== undefined) {
         validGroupPath = true;
       } else {
         Ember.Logger.log(
-          "%c%s#validGroupPath Invalid optionGroupPath `%s`.",
+          "%c%s#validGroupPath Invalid optionGroupPath `%s` in Object: %O.",
           "color: red", // http://www.w3schools.com/html/html_colornames.asp
           this.toString(),
+          lastObject,
           this.get('optionGroupPath')
         );
         
@@ -123,14 +136,10 @@ export default Ember.Component.extend({
     }
   }),
   
-  valueObserver: Ember.observer('value', function(){
-    this._updateChosen();
-  }),
-  
   /*
    * Built options from the content sent in to the ember-select.
    */
-  options: Ember.computed('content', 'optionValuePath', 'optionLabelPath', 'optionGroupPath', 'disabled', {
+  options: Ember.computed('content', 'value', 'optionValuePath', 'optionLabelPath', 'optionGroupPath', 'disabled', {
     get() {
       let groupNames = [],
         groups = [],
@@ -144,31 +153,21 @@ export default Ember.Component.extend({
         groupNames = this.get('content').mapBy(this.get('optionGroupPath'));
         groups = Ember.A(groupNames).uniq();
         
-        /*  /
-        Ember.Logger.log(
-          "%c%s#options creating groups: %O from %O",
-          "color: purple", // http://www.w3schools.com/html/html_colornames.asp
-          this.toString(),
-          groups,
-          groupNames
-        );
-        //*/
+        if(this.get('debug')) {
+          Ember.Logger.log(
+            "%c%s#options creating groups: %O from %O",
+            "color: purple", // http://www.w3schools.com/html/html_colornames.asp
+            this.toString(),
+            groups,
+            groupNames
+          );
+        }
          
         // Build the options with groups
         groups.forEach((group) => {
           let groupOptions = [];
           
           this.get('content').filterBy(this.get('optionGroupPath'), group).forEach((option) => {
-            /*  /
-            Ember.Logger.log(
-              "%c%s#option type: %s option.get type: %s %O",
-              "color: purple", // http://www.w3schools.com/html/html_colornames.asp
-              this.toString(),
-              typeof option,
-              typeof option.get,
-              option
-            );
-            //*/
             if(typeof option.get !== "function") {
               if(['number', 'string', 'boolean'].indexOf(typeof option) === -1) {
                 option = Ember.Object.create(option);
@@ -190,16 +189,6 @@ export default Ember.Component.extend({
       } else {
         // Build the options array
         this.get('content').forEach((option) => {
-          /*  /
-          Ember.Logger.log(
-            "%c%s#option type: %s option.get type: %s %O",
-            "color: purple", // http://www.w3schools.com/html/html_colornames.asp
-            this.toString(),
-            typeof option,
-            typeof option.get,
-            option
-          );
-          //*/
           if(typeof option.get !== "function") {
             if(['number', 'string', 'boolean'].indexOf(typeof option) === -1) {
               option = Ember.Object.create(option);
@@ -214,15 +203,15 @@ export default Ember.Component.extend({
         });
       }
       
-      /*  /
-      Ember.Logger.log(
-        "%c%s#options: %O, value: %O",
-        "color: purple", // http://www.w3schools.com/html/html_colornames.asp
-        this.toString(),
-        options,
-        this.get('value')
-      );
-      //*/
+      if(this.get('debug')) {
+        Ember.Logger.log(
+          "%c%s#options: %O, value: %O",
+          "color: purple", // http://www.w3schools.com/html/html_colornames.asp
+          this.toString(),
+          options,
+          this.get('value')
+        );
+      }
       
       this._updateChosen();
       
@@ -321,6 +310,14 @@ export default Ember.Component.extend({
    */
   _updateChosen() {
     Ember.run.next(this, () => {
+      if(this.get('debug')) {
+        Ember.Logger.log(
+          "%c%s#_updateChosen HIT...",
+          "color: purple", // http://www.w3schools.com/html/html_colornames.asp
+          this.toString()
+        );
+      }
+      
       if(this.$('#ember-chosen-' + this.get('elementId'))) {
         this.$('#ember-chosen-' + this.get('elementId')).trigger("chosen:updated");
       }
