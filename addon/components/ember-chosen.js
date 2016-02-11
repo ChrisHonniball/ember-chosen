@@ -108,6 +108,10 @@ export default Ember.Component.extend({
         return false;
       }
       
+      if(typeof lastObject.get === 'undefined') {
+        lastObject = Ember.Object.create(lastObject);
+      }
+      
       if(this.get('debug')) {
         Ember.Logger.log(
           "%c%s#validGroupPath searching for `%s` in Object: %O",
