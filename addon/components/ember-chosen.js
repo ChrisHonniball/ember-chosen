@@ -14,6 +14,8 @@ export default Ember.Component.extend({
   //! Variables //
   ////////////////
   
+  initialized: false,
+  
   isRTL: false,
   
   multiple: false,
@@ -140,17 +142,14 @@ export default Ember.Component.extend({
     }
   }),
   
-  /*
-   * Built options from the content sent in to the ember-select.
-   */
-  options: Ember.computed('content', 'value', 'optionValuePath', 'optionLabelPath', 'optionGroupPath', 'disabled', {
+  options: Ember.computed('content', 'optionValuePath', 'optionLabelPath', 'optionGroupPath', {
     get() {
       let groupNames = [],
         groups = [],
         options = Ember.A();
       
       if(!this.get('content')) {
-        return null;
+        return options;
       }
       
       if(this.get('validGroupPath')) {
@@ -216,8 +215,6 @@ export default Ember.Component.extend({
           this.get('value')
         );
       }
-      
-      this._updateChosen();
       
       return options;
     }
@@ -296,7 +293,7 @@ export default Ember.Component.extend({
   //! Events //
   /////////////
   
-  didInsertElement() {
+  didRender() {
     this._setup();
   },
   
@@ -309,10 +306,15 @@ export default Ember.Component.extend({
   //! Functions //
   ////////////////
   
+  
   /*
    * Updates the chosen select box.
    */
   _updateChosen() {
+    if(!this.get('initialized')) {
+      return false;
+    }
+    
     Ember.run.next(this, () => {
       if(this.get('debug')) {
         Ember.Logger.log(
@@ -424,6 +426,8 @@ export default Ember.Component.extend({
     
     // Initialize the select box.
     this.$('#ember-chosen-' + this.get('elementId')).chosen(this.get('settings'));
+    
+    this.set('initialized', true);
   },
   
   /*
@@ -431,6 +435,7 @@ export default Ember.Component.extend({
    */
   _teardown() {
     this.$('#ember-chosen-' + this.get('elementId')).chosen('destroy');
+    this.set('initialized', false);
   },
   
   
@@ -440,16 +445,18 @@ export default Ember.Component.extend({
   
   actions: {
     selectValue() {
-      this.set('value', this.$('#ember-chosen-' + this.get('elementId')).val());
+      let value = this.$('#ember-chosen-' + this.get('elementId')).val();
       
-      /*  /
-      Ember.Logger.log(
-        "%c%s#selectValue: %O",
-        "color: purple", // http://www.w3schools.com/html/html_colornames.asp
-        this.toString(),
-        this.$('#ember-chosen-' + this.get('elementId')).val()
-      );
-      //*/
+      if(this.get('debug')) {
+        Ember.Logger.log(
+          "%c%s#selectValue: %O",
+          "color: purple", // http://www.w3schools.com/html/html_colornames.asp
+          this.toString(),
+          value
+        );
+      }
+      
+      this.set('value', value);
       
       if(this.get('action')) {
         Ember.run.once(this, 'sendAction');
