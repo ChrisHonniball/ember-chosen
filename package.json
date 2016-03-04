@@ -1,6 +1,6 @@
 {
   "name": "ember-chosen",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Use Chosen select boxes in your ember project.",
   "directories": {
     "doc": "doc",

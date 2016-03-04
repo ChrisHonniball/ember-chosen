@@ -1,4 +1,4 @@
-<select size="1" id="ember-chosen-{{elementId}}" onchange={{action 'selectValue'}} multiple={{multiple}}>
+<select size="1" id="ember-chosen-{{elementId}}" onchange={{action 'selectValue'}} multiple={{multiple}} disabled={{disabled}}>
   {{#if hasBlock}}
     {{yield}}
   {{else}}

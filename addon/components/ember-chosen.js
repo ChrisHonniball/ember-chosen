@@ -20,9 +20,9 @@ export default Ember.Component.extend({
   
   multiple: false,
   
-  disabled: false,
-  
   debug: false,
+  
+  disabled: false,
   
   /*
    * The content path where the group name is located.
