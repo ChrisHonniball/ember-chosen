@@ -47,7 +47,7 @@
   "dependencies": {
     "broccoli-funnel": "^0.2.3",
     "ember-cli-babel": "^5.0.0",
-    "ember-cli-htmlbars": "0.7.9"
+    "ember-cli-htmlbars": "1.0.11"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
