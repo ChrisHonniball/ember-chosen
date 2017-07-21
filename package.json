@@ -1,6 +1,6 @@
 {
   "name": "ember-chosen",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Use Chosen select boxes in your ember project.",
   "keywords": [
     "ember-addon"
