@@ -9,10 +9,10 @@ module.exports = {
     this._super.included(app);
 
     // Import the correct JS for chosen
-    app.import(app.bowerDirectory + '/chosen/chosen.jquery.min.js');
+    app.import(app.bowerDirectory + '/chosen/chosen.jquery.js');
 
     // Import Chosen CSS
-    app.import(app.bowerDirectory + '/chosen/chosen.min.css');
+    app.import(app.bowerDirectory + '/chosen/chosen.css');
   },
 
   treeForPublic: function(treeName) {

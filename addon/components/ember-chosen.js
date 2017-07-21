@@ -146,7 +146,7 @@ export default Ember.Component.extend({
     const value = this.get('value');
     const selectValue = select.val();
 
-    if (selectValue === value) { return }
+    if (selectValue === value) { return; }
 
     select.val(value);
 

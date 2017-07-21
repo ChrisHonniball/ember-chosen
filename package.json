@@ -1,6 +1,6 @@
 {
   "name": "ember-chosen",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Use Chosen select boxes in your ember project.",
   "keywords": [
     "ember-addon"
@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
+    "broccoli-funnel": "^1.2.0",
     "ember-ajax": "^2.4.1",
     "ember-cli": "2.11.1",
     "ember-cli-app-version": "^2.0.0",
