@@ -12,8 +12,8 @@
       {{#if validGroupPath}}
         {{#each options as |group|}}
           <optgroup label={{group.label}}>
-            {{#each group.options as |option|}}
-              <option value={{option.value}} selected="{{if option.selected 'selected'}}">{{option.label}}</option>
+            {{#each group.options as |opt|}}
+              <option value={{opt.value}} selected="{{if opt.selected 'selected'}}">{{opt.label}}</option>
             {{else}}
               <option disabled>No Options Available</option>
             {{/each}}
@@ -22,8 +22,8 @@
           <option disabled>No Options Available</option>
         {{/each}}
       {{else}}
-        {{#each options as |option|}}
-          <option value={{option.value}} selected="{{if option.selected 'selected'}}">{{option.label}}</option>
+        {{#each options as |opt|}}
+          <option value={{opt.value}} selected="{{if opt.selected 'selected'}}">{{opt.label}}</option>
         {{else}}
           <option disabled>No Options Available</option>
         {{/each}}
